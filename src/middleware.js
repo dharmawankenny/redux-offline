@@ -52,6 +52,11 @@ export const createOfflineMiddleware = (config: Config) => (store: any) => (next
 
   // find any actions to send, if any
   const state: AppState = store.getState();
+
+  if (!state || !state.offline) {
+    return result;
+  }
+
   const actions = take(state, config);
 
   // if the are any actions in the queue that we are not
